@@ -1,1 +1,1 @@
-UPDATE characters SET species = "Martian" WHERE id = last_insert_rowid()
+UPDATE characters SET species = "Martian" WHERE id = (SELECT MAX(id))
