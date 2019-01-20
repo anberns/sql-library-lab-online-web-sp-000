@@ -7,7 +7,7 @@ def select_name_and_motto_of_char_with_longest_motto
 end
 
 def select_value_and_count_of_most_prolific_species
-  "SELECT characters.species, COUNT(characters.species) FROM characters GROUP BY characters.species"
+  "SELECT characters.species, COUNT(characters.species) FROM characters GROUP BY characters.species HAVING species_count = (SELECT max(characters.species) FROM characters)"
 end
 
 def select_name_and_series_subgenres_of_authors
@@ -21,13 +21,3 @@ end
 def select_character_names_and_number_of_books_they_are_in
   "SELECT characters.name, COUNT(books.id) AS book_count FROM characters INNER JOIN character_books on characters.id = character_books.character_id INNER JOIN books on character_books.book_id = books.id GROUP BY characters.name ORDER BY book_count DESC"
 end
-
-
-SELECT
- trackid,
- name,
- bytes
-FROM
- tracks
-WHERE
- bytes = (SELECT max(bytes) FROM tracks);
